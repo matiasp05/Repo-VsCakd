@@ -21,6 +21,6 @@ int main(void){
     scanf("%i", &n);
 
     imprimir_recur(n);
-    //hola como andas gil
+
     return 0;
 }
