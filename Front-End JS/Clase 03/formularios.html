@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!--  -->
+    <!-- tipo de accion que queremos que se procese   |       -->
+    <form action=""                                       method="">
+        <!--  en for, name y id se pone lo mismo-->
+        <label for="nombre">Nombre</label>
+        <!-- seria donde escribiria el usuario       es lo que se ve de fondo en la caja |  pedimos que sea obligatorio el campo-->
+        <input type="text" name="nombre" id="nombre" placeholder="ingresa tu nombre"           required>
+
+        <br> <!-- salto de linea que es mala practica(debemos hacerlo con css)-->
+        <label for="Reason">Motivo:</label>
+        <select name="" id="Reason">
+            <option value="" disabled>Selecciona una opcion</option>
+            <option value="Reclamo">Reclamo</option>
+            <option value="Devolucion">Devolucion</option>
+        </select>
+        <!--    boton envia la informacion  |  lo que diria en el boton-->
+        <input type="submit"                          value="ENVIAR">
+    </form>
+</body>
+</html>
