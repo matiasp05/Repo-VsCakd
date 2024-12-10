@@ -24,7 +24,7 @@ void generar_tabla(Ofertas oferta[100], int *ml){
     }else{
         *ml=0;
         Libro libros[100];
-        while(fread(&libros[*ml], sizeof(libros), 1, archivo) == 1){
+        while(fread(&libros[*ml], sizeof(Libro), 1, archivo) == 1){
             (*ml)++;
         }
 
@@ -45,4 +45,20 @@ void generar_tabla(Ofertas oferta[100], int *ml){
         }
         fclose(archivo);
     }
+}
+
+void ordenar_tabla(Ofertas oferta[100], int ml){
+    int i, j;
+    Ofertas aux;
+
+    for(i=0;i<ml;i++){
+        for(j=0;j<ml-i;j++){
+            if(strcmp(oferta[j].titulo, oferta[j+1].titulo) > 0){
+                aux = oferta[j];
+                oferta[j] = oferta[j+1];
+                oferta[j+1] = aux;
+            } 
+        }
+    }
+
 }
