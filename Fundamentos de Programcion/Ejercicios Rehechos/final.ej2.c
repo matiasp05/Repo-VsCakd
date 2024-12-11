@@ -8,14 +8,15 @@ b. Haga una llamada a la función mostrar_estructura_dinamica a la que se le deb
 #include <stdio.h>
 #include <stdlib.h>
 
-int* crear_estructura_dinamica(int vector[], int ml){
+int* crear_estructura_dinamica(int vector[100], int ml){
     int i;
-    int *ptr=NULL;
+    int *ptr = NULL;
+    ptr = malloc(ml * sizeof(int));
     if(ptr!=NULL){
         for(i=0;i<ml;i++){
             ptr[i] = vector[i];
         }
-    } else {
+    }else{
         return NULL;
     }
     return ptr;
@@ -23,12 +24,13 @@ int* crear_estructura_dinamica(int vector[], int ml){
 
 int main(void){
     int vector[100]= {48, 23, 2 , 5, 187};
-    int ml=5;
-    int *ptr;
+    int ml = 5;
+    int *ptr = NULL;
 
     ptr = crear_estructura_dinamica(vector, ml);
     if(ptr!=NULL){
-        mostrar_estructura_dinamica(ptr, ml);
+        printf("--Vector--\n");
+        mostrar_estructura_dinamica(vector, ml);
         free(ptr);
     }
     return 0;

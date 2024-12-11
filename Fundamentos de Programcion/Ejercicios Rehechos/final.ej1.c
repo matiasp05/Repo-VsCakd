@@ -5,60 +5,57 @@
 typedef struct{
     int codigo;
     char titulo[30];
-    int stock;
+    int stock_act;
     int stock_min;
     float precio;
-}Libro;
+} Libro;
 
 typedef struct{
     int codigo;
     char titulo[30];
-    int libros_ofertar;
+    int cant_libros;
     float precio;
-}Ofertas;
+} Oferta;
 
-void generar_tabla(Ofertas oferta[100], int *ml){
+void generar_tabla(Oferta ofertas[], int *ml){
     FILE *archivo = fopen("Stock.dat", "rb");
     if(archivo==NULL){
-        printf("No se pudo abrir el archivo.\n");
+        printf("No se puede abrir el archivo.\n");
     }else{
-        *ml=0;
+        int i = 0;
         Libro libros[100];
-        while(fread(&libros[*ml], sizeof(Libro), 1, archivo) == 1){
-            (*ml)++;
+        while(fread(&libros[i], sizeof(Libro), 1, archivo) == 1){
+            i++;
         }
-
-        if((*ml)==0){
-            printf("No se encontraron registros en el archivo.\n");
-        }else{
-            printf("Se encontraron %i registros en el archivo.\n", *ml);
-            int i, j=0;
-            for(i=0;i<*ml;i++){
-                if(libros[i].stock > libros[i].stock_min*2){
-                    oferta[j].codigo = libros[i].codigo;
-                    strcpy(oferta[j].titulo, libros[i].titulo);
-                    oferta[j].libros_ofertar = (libros[i].stock - libros[i].stock_min)/2;
-                    oferta[j].precio = (libros[i].precio/30) * 100;
-                    j++;
+        if(i>0){
+            printf("Se encontraron %i registros en el archivo.\n", i+1);
+            int j, *ml=0;
+            for(j=0;j<(*ml);j++){
+                if(libros[j].stock_act > libros[j].stock_min * 2){
+                    ofertas[*ml].codigo = libros[j].codigo;
+                    strcpy(ofertas[*ml].titulo, libros[j].titulo);
+                    ofertas[*ml].cant_libros = (libros[j].stock_act - libros[j].stock_min) / 2;
+                    ofertas[*ml].precio = (libros[j].precio * 70) / 100;
+                    (*ml)++;
                 }
             }
+        }else{
+            printf("No se encontraron registros en el archivo.\n");
         }
         fclose(archivo);
     }
 }
 
-void ordenar_tabla(Ofertas oferta[100], int ml){
+void ordenar_tabla(Oferta ofertas[], int ml){
     int i, j;
-    Ofertas aux;
-
+    Oferta aux;
     for(i=0;i<ml;i++){
         for(j=0;j<ml-i;j++){
-            if(strcmp(oferta[j].titulo, oferta[j+1].titulo) > 0){
-                aux = oferta[j];
-                oferta[j] = oferta[j+1];
-                oferta[j+1] = aux;
-            } 
+            if(strcmp(ofertas[j].titulo, ofertas[j+1].titulo) > 0){
+                aux = ofertas[j];
+                ofertas[j] = ofertas[j+1];
+                ofertas[j+1] = aux;
+            }
         }
     }
-
 }
