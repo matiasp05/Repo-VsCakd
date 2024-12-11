@@ -29,7 +29,8 @@ void generar_tabla(Oferta ofertas[], int *ml){
         }
         if(i>0){
             printf("Se encontraron %i registros en el archivo.\n", i+1);
-            int j, *ml=0;
+            int j;
+            *ml=0;
             for(j=0;j<(*ml);j++){
                 if(libros[j].stock_act > libros[j].stock_min * 2){
                     ofertas[*ml].codigo = libros[j].codigo;
